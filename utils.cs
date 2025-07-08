@@ -1,4 +1,63 @@
 /// <summary>
+/// Bloqueia caracteres especiais.
+/// </summary>
+public void BloqueiaCaractereEspecial(KeyPressEventArgs e, Action onEnterPress)
+        {
+
+            string caracteresProibidos = "!@#$%¨&*()_+-=*/[]{}<>,.;:/?|\\";
+
+            if (caracteresProibidos.Contains(e.KeyChar.ToString()))
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+                e.Handled = true;
+            }
+        }
+
+/// <summary>
+/// Validacao de datas
+/// </summary>
+/// <param name="data">Informar a data no padrao dd/mm/yyyy</param>
+/// <returns>True para data valida e False para data invalida</returns>
+public static bool ValidaData(string data)
+        {
+            try
+            {
+                DateTime dataValidacao = Convert.ToDateTime(data);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+public static void msgErro(string pMensagem)
+        {
+            MessageBox.Show(pMensagem, Constantes.NOME_SISTEMA, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+public static void msgExclamation(string pMensagem)
+        {
+            MessageBox.Show(pMensagem, Constantes.NOME_SISTEMA, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+public static void msgInformation(string pMensagem)
+        {
+            MessageBox.Show(pMensagem, Constantes.NOME_SISTEMA, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+public static DialogResult msgQuestion(string mensagem)
+        {
+            return MessageBox.Show(mensagem, Constantes.NOME_SISTEMA, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
+/// <summary>
 /// Altera a cor de fundo de todos os elementos cujo nome começa com "pnl", de forma recursiva.
 /// Exemplo: SetCor(this, "pnl", SystemColors.ControlLight);
 /// </summary>
@@ -88,3 +147,27 @@ public sealed class HoverZoomBehavior
           control.Tag = new HoverZoomBehavior(control, maxIncrease, step, intervalMs);
       }
   }
+
+/// <summary>
+/// Exibe saudação com base no horário.
+/// </summary>
+public string MsgSaudacao()
+        {
+            var hora = DateTime.Now.TimeOfDay;
+            string msg;
+
+            if (hora >= new TimeSpan(18, 0, 0))
+            {
+                msg = "Boa Noite";
+            }
+            else if (hora >= new TimeSpan(12, 0, 0))
+            {
+                msg = "Boa Tarde";
+            }
+            else
+            {
+                msg = "Bom dia";
+            }
+
+            return msg;
+        }
