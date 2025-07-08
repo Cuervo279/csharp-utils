@@ -1,5 +1,6 @@
 /// <summary>
 /// Altera a cor de fundo de todos os elementos cujo nome começa com "pnl", de forma recursiva.
+/// Exemplo: SetCor(this, "pnl", SystemColors.ControlLight);
 /// </summary>
 /// <param name="pai">O controle pai (geralmente o formulário ou um container).</param>
 /// <param name="tipo">Nome do elemento (geralmente uma sigla).</param>
