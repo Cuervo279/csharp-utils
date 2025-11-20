@@ -171,3 +171,40 @@ public string MsgSaudacao()
 
             return msg;
         }
+
+/// <summary>
+/// Efeito de fade.
+/// </summary>
+public void btnFade(Panel pnl, string colorHex)
+{
+
+    Color corFinal = ColorTranslator.FromHtml(colorHex);
+    Color corInicial = pnl.BackColor;
+
+    int steps = 20;          // quantidade de passos do fade (quanto maior, mais suave)
+    int interval = 10;       // tempo entre os passos (em ms)
+
+    int stepAtual = 0;
+
+    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+    timer.Interval = interval;
+
+    timer.Tick += (s, e) =>
+    {
+        stepAtual++;
+
+        float t = stepAtual / (float)steps; // 0 → 1
+
+        // interpolação de cor (fade)
+        int r = (int)(corInicial.R + (corFinal.R - corInicial.R) * t);
+        int g = (int)(corInicial.G + (corFinal.G - corInicial.G) * t);
+        int b = (int)(corInicial.B + (corFinal.B - corInicial.B) * t);
+
+        pnl.BackColor = Color.FromArgb(r, g, b);
+
+        if (stepAtual >= steps)
+            timer.Stop();
+    };
+
+    timer.Start();
+}
